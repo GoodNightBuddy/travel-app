@@ -16,7 +16,7 @@ const Booking: React.FC<IBookingProps> = ({ booking }) => {
     const res = await dispatch(
       bookingsActionCreator.deleteBooking({ bookingId: booking.id })
     );
-    if (res.payload) {
+    if (res.meta.requestStatus !== "rejected") {
       toast.success('Trip was successfully deleted', {
         position: 'top-center',
         autoClose: 2000,
