@@ -1,6 +1,7 @@
 import { ITrip } from "../../components/common/Trips/types/types";
 import TokenService from "../token/TokenService";
 import ApiRoutes from "../../enums/api/ApiRoutes";
+import { withErrorHandling } from "../error/HandleApiError";
 import { CustomError } from "../error/CustomError";
 
 class TripService {
@@ -12,10 +13,9 @@ class TripService {
         "Authorization": `Bearer ${token}`
       },
     });
-    
 
     if (!response.ok) {
-      const { error, message, statusCode } = await response.json();
+      const { message, error, statusCode } = await response.json();
       throw new CustomError(message, error, statusCode);
     }
 
@@ -33,7 +33,7 @@ class TripService {
     });
 
     if (!response.ok) {
-      const { error, message, statusCode } = await response.json();
+      const { message, error, statusCode } = await response.json();
       throw new CustomError(message, error, statusCode);
     }
 
@@ -41,5 +41,8 @@ class TripService {
     return currentTrip;
   }
 }
+
+TripService.getTrip = withErrorHandling(TripService.getTrip);
+TripService.getTrips = withErrorHandling(TripService.getTrips);
 
 export default TripService;

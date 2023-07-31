@@ -1,6 +1,7 @@
 import { IBooking } from "../../components/pages/BookingPage/types/types";
 import ApiRoutes from "../../enums/api/ApiRoutes";
 import { BookingDto, deleteBookingDto } from "../../store/types/types";
+import { CustomError } from "../error/CustomError";
 import { withErrorHandling } from "../error/HandleApiError";
 import TokenService from "../token/TokenService";
 
@@ -20,8 +21,8 @@ class BookingService {
     });
 
     if (!response.ok) {
-      const { message } = await response.json();
-      throw new Error(message);
+      const { message, error, statusCode } = await response.json();
+      throw new CustomError(message, error, statusCode);
     }
 
     const bookings = await response.json() as IBooking[];
@@ -40,8 +41,8 @@ class BookingService {
     });
 
     if (!response.ok) {
-      const { message } = await response.json();
-      throw new Error(message);
+      const { message, error, statusCode } = await response.json();
+      throw new CustomError(message, error, statusCode);
     }
 
     const booking = await response.json() as IBooking;
@@ -58,8 +59,8 @@ class BookingService {
     });
 
     if (!response.ok) {
-      const { message } = await response.json();
-      throw new Error(message);
+      const { message, error, statusCode } = await response.json();
+      throw new CustomError(message, error, statusCode);
     }
 
     return { bookingId };

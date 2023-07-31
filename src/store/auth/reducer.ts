@@ -1,7 +1,6 @@
 import { createReducer, isAnyOf } from "@reduxjs/toolkit";
 import { IStateAuth} from "../types/types";
 import { signUp, signIn, reSignIn, signOut } from "./actions";
-import { error } from "console";
 
 const initialState: IStateAuth = {
   user: null,

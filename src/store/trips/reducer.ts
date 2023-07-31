@@ -8,8 +8,6 @@ const initialState: IStateTrips = {
   currentTrip: null
 }
 
-
-
 const reducer = createReducer(initialState, builder => {
   builder
     .addCase(getTrips.fulfilled, (state, action) => {

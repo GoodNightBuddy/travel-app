@@ -7,4 +7,3 @@ export class CustomError extends Error {
     this.statusCode = statusCode;
   }
 }
-

@@ -3,16 +3,29 @@ import { bookingsActionCreator } from '../../../../store/action';
 import { AppDispatch } from '../../../../store/types/types';
 import { IBookingProps } from '../types/types';
 import './styles.scss';
+import { toast } from 'react-toastify';
 
-const Booking: React.FC<IBookingProps> = ({booking}) => {
+const Booking: React.FC<IBookingProps> = ({ booking }) => {
   const date = new Date(booking.date).toLocaleDateString();
 
   const dispatch = useDispatch() as AppDispatch;
 
-  const deleteBooking: React.MouseEventHandler<HTMLButtonElement> = () => {
-    dispatch(
+  const deleteBooking: React.MouseEventHandler<
+    HTMLButtonElement
+  > = async () => {
+    const res = await dispatch(
       bookingsActionCreator.deleteBooking({ bookingId: booking.id })
     );
+    if (res.payload) {
+      toast.success('Trip was successfully deleted', {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+    }
   };
 
   return (
