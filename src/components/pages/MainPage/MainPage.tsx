@@ -60,6 +60,7 @@ const MainPage: React.FC = () => {
 
   const onChangeTitle: React.ChangeEventHandler<HTMLInputElement> = e => {
     setSearchTitle(e.target.value);
+    filter({title: e.target.value });
   };
 
   const onChangeDuration: React.ChangeEventHandler<HTMLSelectElement> = e => {
